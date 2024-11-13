@@ -1,51 +1,23 @@
 import React, { useState } from "react";
 
-function NewPlantForm({ addPlant }) {
-  // State to track input values
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    price: "",
-  });
+function NewPlantForm({ onAddPlant }) {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
 
-  // Handle input change
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Send a POST request to add the new plant
+    const newPlant = { name, image, price: parseFloat(price) };
+
     fetch("http://localhost:6001/plants", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: formData.name,
-        image: formData.image,
-        price: parseFloat(formData.price),
-      }),
+      body: JSON.stringify(newPlant),
     })
-      .then((response) => response.json()) // Parse the JSON response
-      .then((data) => {
-        // Call the addPlant function passed from the parent to update the plant list
-        addPlant(data);
-        // Reset form data
-        setFormData({
-          name: "",
-          image: "",
-          price: "",
-        });
-      })
-      .catch((error) => {
-        console.error("Error adding plant:", error);
-      });
+      .then((response) => response.json())
+      .then((addedPlant) => onAddPlant(addedPlant)); // Add new plant to the state
   };
 
   return (
@@ -55,24 +27,24 @@ function NewPlantForm({ addPlant }) {
         <input
           type="text"
           name="name"
-          value={formData.name}
           placeholder="Plant name"
-          onChange={handleInputChange}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           name="image"
-          value={formData.image}
           placeholder="Image URL"
-          onChange={handleInputChange}
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
         />
         <input
           type="number"
           name="price"
-          value={formData.price}
           step="0.01"
           placeholder="Price"
-          onChange={handleInputChange}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
         />
         <button type="submit">Add Plant</button>
       </form>
