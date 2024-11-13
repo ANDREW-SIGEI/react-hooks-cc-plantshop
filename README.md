@@ -1,3 +1,49 @@
+# React Hooks Plant Shop
+
+This is a plant shop web application built using React and JSON Server to manage plant data. The application allows users to view a collection of plants, search for plants by name, update plant prices, and add new plants to the shop.
+
+## Features
+
+- **View plants**: Displays a list of plants with their names, prices, and images.
+- **Search**: Users can search for plants by name.
+- **Update price**: Allows users to update the price of a plant.
+- **Delete plant**: Users can delete plants from the list.
+- **Add new plant**: Users can add new plants to the shop.
+
+## Installation
+
+To run the project locally, follow these steps:
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/ANDREW-SIGEI/react-hooks-cc-plantshop.git
+    ```
+
+2. **Install dependencies**:
+    ```bash
+    cd react-hooks-cc-plantshop
+    npm install
+    ```
+
+3. **Start JSON Server** (make sure your `db.json` is correctly set up):
+    ```bash
+    json-server --watch db.json --port 6001
+    ```
+
+4. **Start the React app**:
+    ```bash
+    npm start
+    ```
+
+The app will be available at `http://localhost:3000`, and the JSON Server API will be running at `http://localhost:6001`.
+
+## Contributing
+
+Feel free to open issues or submit pull requests if you find any bugs or want to suggest improvements.
+
+## License
+
+This project is licensed under the MIT License.
 # Phase 2 Code Challenge: Plantsy
 
 ## Demo
