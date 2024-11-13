@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
-function PlantCard() {
+function PlantCard({ plant, updatePrice, deletePlant }) {
+  const [newPrice, setNewPrice] = useState(plant.price);
+
+  // Handle the price input change
+  const handlePriceChange = (e) => {
+    setNewPrice(e.target.value);
+  };
+
+  // Handle price update
+  const handleUpdatePrice = () => {
+    updatePrice(plant.id, parseFloat(newPrice));
+  };
+
+  // Handle delete
+  const handleDelete = () => {
+    deletePlant(plant.id);
+  };
+
   return (
-    <li className="card" data-testid="plant-item">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
-      <h4>{"plant name"}</h4>
-      <p>Price: {"plant price"}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
-    </li>
+    <div className="plant-card">
+      <img src={plant.image} alt={plant.name} />
+      <h3>{plant.name}</h3>
+      <p>{plant.price} USD</p>
+
+      {/* Update Price */}
+      <input
+        type="number"
+        value={newPrice}
+        onChange={handlePriceChange}
+        step="0.01"
+      />
+      <button onClick={handleUpdatePrice}>Update Price</button>
+
+      {/* Delete Plant */}
+      <button onClick={handleDelete}>Delete</button>
+    </div>
   );
 }
 
