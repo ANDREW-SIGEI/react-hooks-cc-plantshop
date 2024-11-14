@@ -10,7 +10,7 @@ function PlantPage() {
   console.log(plants)
 
   useEffect(() => {
-    fetch("http://localhost:3000/plants")
+    fetch("http://localhost:6001/plants")
       .then((response) => response.json())
       .then((data) => setPlants(data));
   }, []);
